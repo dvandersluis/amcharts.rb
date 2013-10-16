@@ -1,0 +1,3 @@
+/*
+ *= require amcharts/amcharts
+*/

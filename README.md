@@ -1,6 +1,12 @@
 # Amcharts.rb
 
-TODO: Write a gem description
+Ruby on Rails wrapper for creating AmCharts charts.
+
+## Using a Commercial license
+
+If you have purchased the commercial version of AmCharts, place the amcharts.js file it comes with inside a
+`javascripts/amcharts` directory within `(app|lib|vendor)/assets`, so that it will be used instead of the free
+version that is included in this gem.
 
 ## Installation
 
@@ -15,10 +21,6 @@ And then execute:
 Or install it yourself as:
 
     $ gem install amcharts.rb
-
-## Usage
-
-TODO: Write usage instructions here
 
 ## Contributing
 

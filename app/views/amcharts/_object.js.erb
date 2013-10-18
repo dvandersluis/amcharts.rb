@@ -1,0 +1,12 @@
+<% if object %>
+  <% var = local_assigns.fetch(:var, name) %>
+  <% method = local_assigns.fetch(:method, "add#{name.to_s.camelize}") %>
+  <% js_object = local_assigns.fetch(:js_object, "new AmCharts.#{local_assigns.fetch(:type, name.to_s.camelize)}") %>
+
+  var <%= var %> = <%= js_object %>;
+  <% builder.render_settings(object, var.to_s) %>
+  <%= yield(object, var) rescue nil %>
+  <% if method %>
+    chart.<%= method %>(<%= var %>);
+  <% end %>
+<% end %>

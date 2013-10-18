@@ -1,4 +1,4 @@
-# Amcharts.rb
+# AmCharts.rb
 
 Ruby on Rails wrapper for creating AmCharts charts.
 
@@ -29,3 +29,8 @@ Or install it yourself as:
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+## Acknowledgments
+
+* Built upon the excellent [AmCharts Javascript V3](http://www.amcharts.com/javascript-charts/) charting package.
+* Special thanks to [TalentNest](http://github.com/talentnest), who sponsored this gem's development.

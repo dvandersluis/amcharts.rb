@@ -1,5 +1,6 @@
 /*
  *= require amcharts
+ *= require amstock
  *= require funnel
  *= require gauge
  *= require pie

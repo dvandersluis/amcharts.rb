@@ -2,9 +2,12 @@ require "amcharts/version"
 require_relative '../app/helpers/amcharts/amcharts_helper'
 
 module AmCharts
+  autoload :Axis,         'amcharts/axis'
   autoload :Chart,        'amcharts/chart'
+  autoload :Cursor,       'amcharts/cursor'
   autoload :Graph,        'amcharts/graph'
   autoload :Legend,       'amcharts/legend'
+  autoload :ScrollBar,    'amcharts/scroll_bar'
   autoload :Set,          'amcharts/set'
   autoload :Settings,     'amcharts/settings'
   autoload :UsesSettings, 'amcharts/uses_settings'

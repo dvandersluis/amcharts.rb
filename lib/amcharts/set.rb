@@ -11,6 +11,10 @@ module AmCharts
       @set = set
     end
 
+    class << self
+      alias_method :[], :new
+    end
+
     def [](item)
       item = item.to_sym
       detect{ |i| i.name.to_sym == item }

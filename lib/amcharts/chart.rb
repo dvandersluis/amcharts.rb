@@ -5,21 +5,22 @@ require 'amcharts'
 
 module AmCharts
   class Chart
-    autoload :Funnel,   'amcharts/chart/funnel'
-    autoload :Gauge,    'amcharts/chart/gauge'
-    autoload :Pie,      'amcharts/chart/pie'
-    autoload :Radar,    'amcharts/chart/radar'
-    autoload :Serial,   'amcharts/chart/serial'
-    autoload :XY,       'amcharts/chart/xy'
+    autoload :Funnel,       'amcharts/chart/funnel'
+    autoload :Gauge,        'amcharts/chart/gauge'
+    autoload :Pie,          'amcharts/chart/pie'
+    autoload :Radar,        'amcharts/chart/radar'
+    autoload :Rectangular,  'amcharts/chart/rectangular'
+    autoload :Serial,       'amcharts/chart/serial'
+    autoload :XY,           'amcharts/chart/xy'
 
     attr_accessor :data_provider, :container
     attr_accessor :width, :height
-    attr_reader :titles, :graphs, :legends, :data
+    attr_reader :titles, :graphs, :legends, :data, :settings
 
     def initialize(*data, &block)
       @data = data.flatten
-      @graphs = Set.new(Graph)
-      @legends = Set.new(Legend)
+      @graphs = Set[Graph]
+      @legends = Set[Legend]
       @settings = Settings.new
       instance_exec(self, &block) if block_given?
     end
@@ -53,16 +54,19 @@ module AmCharts
       self.class.amchart_type
     end
 
+    # Axes are only defined for rectangular charts
+    def category_axis
+      nil
+    end
+
+    def value_axes
+      []
+    end
+
+    # Delegate unknown messages to the settings object
     def method_missing(name, *args, &block)
       return type.send(name) if type if name.to_s.end_with?('?')
       @settings.send(name, *args, &block)
-    end
-  private
-
-    def initialize_graph_set
-      # Create a new GraphSet that is bound to self so that new graphs can be associated back to the chart
-      # Some chart type don't use graphs, so should override this method to return []
-      GraphSet.new &(-> chart { proc{ |set| set.chart = chart } }).call(self)
     end
   end
 end

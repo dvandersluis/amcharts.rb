@@ -1,8 +1,9 @@
 module AmCharts
   class ChartBuilder
-    attr_reader :template
+    attr_reader :template, :chart
 
-    def initialize(template)
+    def initialize(chart, template)
+      @chart = chart
       @template = template
     end
 
@@ -11,7 +12,7 @@ module AmCharts
       raw(val.to_json)
     end
 
-    def render_data(chart)
+    def render_data
       concat render(partial: 'amcharts/data.js.erb', locals: { chart: chart, builder: self })
     end
 
@@ -31,9 +32,15 @@ module AmCharts
       end
     end
 
-    def render_title(chart)
+    def render_title
       chart.titles.each do |(title, options)|
         concat render(partial: 'amcharts/title.js.erb', locals: { title: title, options: options, builder: self })
+      end
+    end
+
+    def render_listeners
+      chart.listeners.each do |listener|
+        concat render(partial: 'amcharts/listener.js.erb', locals: { type: listener.type, method: listener.method, builder: self })
       end
     end
 

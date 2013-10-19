@@ -14,13 +14,14 @@ module AmCharts
     autoload :XY,           'amcharts/chart/xy'
 
     attr_accessor :data_provider, :container
-    attr_accessor :width, :height
-    attr_reader :titles, :graphs, :legends, :data, :settings
+    attr_accessor :width, :height, :loading_indicator
+    attr_reader :titles, :graphs, :legends, :data, :settings, :listeners
 
     def initialize(*data, &block)
       @data = data.flatten
       @graphs = Set[Graph]
       @legends = Set[Legend]
+      @listeners = Set[Listener]
       @settings = Settings.new
       instance_exec(self, &block) if block_given?
     end
@@ -46,6 +47,15 @@ module AmCharts
       @width, @height = dim.split("x").map(&:to_i)
     end
 
+    def loading_indicator!
+      @loading_indicator = true
+      listeners.new(:rendered, :hide_loading_indicator)
+    end
+
+    def loading_indicator?
+      self.loading_indicator
+    end
+
     def type
       self.class.type
     end
@@ -62,6 +72,8 @@ module AmCharts
     def value_axes
       []
     end
+
+  private
 
     # Delegate unknown messages to the settings object
     def method_missing(name, *args, &block)

@@ -1,5 +1,9 @@
 // If the container element doesn't already exist, create it
-add_container_if_needed('<%= container %>', <%= chart.width %>, <%= chart.height %>);
+var container = add_container_if_needed('<%= container %>', <%= chart.width %>, <%= chart.height %>);
+
+<% if chart.loading_indicator? %>
+  add_loading_indicator(container, <%= chart.width %>, <%= chart.height %>, <%= builder.to_js(:chart_data_loading) %>, '<%= escape_javascript asset_path('amcharts/loading.gif') %>');
+<% end %>
 
 AmCharts.ready(function() {
   var chart_data = <%= builder.to_js(chart.data) %>;
@@ -11,7 +15,7 @@ AmCharts.ready(function() {
 
   <% builder.render_settings(chart, 'chart') %>
 
-  <% builder.render_data(chart) %>
+  <% builder.render_data %>
 
   <% builder.render_component(chart.legends, name: :legend, type: 'AmLegend') %>
   <% builder.render_component(chart.category_axis, name: :category_axis, js_object: 'chart.categoryAxis', method: false) %>
@@ -19,7 +23,9 @@ AmCharts.ready(function() {
   <% builder.render_component(chart.cursor, name: :chart_cursor) %>
   <% builder.render_component(chart.scrollbar, name: :chart_scrollbar) %>
 
-  <% builder.render_title(chart) %>
+  <% builder.render_title %>
+
+  <% builder.render_listeners %>
 
   chart.write('<%= container %>');
 });

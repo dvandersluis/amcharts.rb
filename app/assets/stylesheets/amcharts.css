@@ -1,0 +1,39 @@
+.chart-wrapper
+{
+  position: relative;
+}
+
+.chart-wrapper .chart-blanket
+{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  background: white;
+}
+
+.chart-wrapper .chart-blanket > div
+{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.chart-wrapper .chart-blanket > div > div
+{
+  float: left;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  margin-top: -18px;
+}
+
+.chart-wrapper .chart-blanket > div > div > div
+{
+  position: relative;
+  right: 50%;
+  text-align: center;
+}

@@ -8,6 +8,7 @@ module AmCharts
   autoload :Cursor,       'amcharts/cursor'
   autoload :Graph,        'amcharts/graph'
   autoload :Legend,       'amcharts/legend'
+  autoload :Listener,     'amcharts/listener'
   autoload :ScrollBar,    'amcharts/scroll_bar'
   autoload :Set,          'amcharts/set'
   autoload :Settings,     'amcharts/settings'

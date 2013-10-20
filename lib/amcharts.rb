@@ -1,3 +1,4 @@
+require 'collection_of'
 require "amcharts/version"
 require_relative '../app/helpers/amcharts/amcharts_helper'
 
@@ -10,7 +11,6 @@ module AmCharts
   autoload :Legend,       'amcharts/legend'
   autoload :Listener,     'amcharts/listener'
   autoload :ScrollBar,    'amcharts/scroll_bar'
-  autoload :Set,          'amcharts/set'
   autoload :Settings,     'amcharts/settings'
   autoload :UsesSettings, 'amcharts/uses_settings'
 

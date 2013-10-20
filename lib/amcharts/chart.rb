@@ -19,9 +19,9 @@ module AmCharts
 
     def initialize(*data, &block)
       @data = data.flatten
-      @graphs = Set[Graph]
-      @legends = Set[Legend]
-      @listeners = Set[Listener]
+      @graphs = Collection[Graph]
+      @legends = Collection[Legend]
+      @listeners = Collection[Listener]
       @settings = Settings.new
       instance_exec(self, &block) if block_given?
     end

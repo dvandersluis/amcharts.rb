@@ -5,7 +5,7 @@ module AmCharts
     attr_reader :value_axes
 
     def initialize(*)
-      @value_axes = Set[Axis::Value]
+      @value_axes = Collection[Axis::Value]
       super
     end
 

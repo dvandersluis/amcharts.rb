@@ -5,6 +5,10 @@ var container = add_container_if_needed('<%= container %>', <%= chart.width %>, 
   add_loading_indicator(container, <%= chart.width %>, <%= chart.height %>, <%= builder.to_js(:chart_data_loading) %>, '<%= escape_javascript asset_path('amcharts/loading.gif') %>');
 <% end %>
 
+<% if chart.legend_div %>
+  add_legend_div('<%= chart.legend_div == true ? "#{container}_legend" : chart.legend_div %>', container);
+<% end %>
+
 AmCharts.ready(function() {
   var chart_data = <%= builder.to_js(chart.data) %>;
   var chart = new <%= chart.amchart_type %>;
@@ -17,7 +21,8 @@ AmCharts.ready(function() {
 
   <% builder.render_data %>
 
-  <% builder.render_component(chart.legends, name: :legend, type: 'AmLegend') %>
+  <% builder.render_legend %>
+
   <% builder.render_component(chart.category_axis, name: :category_axis, js_object: 'chart.categoryAxis', method: false) %>
   <% builder.render_component(chart.value_axes, name: :value_axis) %>
   <% builder.render_component(chart.cursor, name: :chart_cursor) %>

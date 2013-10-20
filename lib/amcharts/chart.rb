@@ -15,7 +15,7 @@ module AmCharts
 
     attr_accessor :data_provider, :container
     attr_accessor :width, :height, :loading_indicator
-    attr_reader :titles, :graphs, :legends, :data, :settings, :listeners
+    attr_reader :titles, :graphs, :legends, :data, :settings, :listeners, :legend_div
 
     def initialize(*data, &block)
       @data = data.flatten
@@ -23,6 +23,7 @@ module AmCharts
       @legends = Collection[Legend]
       @listeners = Collection[Listener]
       @settings = Settings.new
+      @titles = []
       instance_exec(self, &block) if block_given?
     end
 
@@ -39,8 +40,15 @@ module AmCharts
     end
 
     def add_title(text, options = {})
-      @titles ||= []
       @titles << [text, options.reverse_merge(size: 13, bold: true, alpha: 1, color: '#000000')]
+    end
+
+    def width=(w)
+      @width = get_dimension_value(w)
+    end
+
+    def height=(h)
+      @height = get_dimension_value(h)
     end
 
     def dimensions=(dim)
@@ -54,6 +62,14 @@ module AmCharts
 
     def loading_indicator?
       self.loading_indicator
+    end
+
+    def detach_legend(div = true)
+      @legend_div = div
+    end
+
+    def process_data
+      data.each { |row| yield row }
     end
 
     def type
@@ -74,6 +90,10 @@ module AmCharts
     end
 
   private
+
+    def get_dimension_value(value)
+      value.respond_to?(:call) ? value.call(data) : value
+    end
 
     # Delegate unknown messages to the settings object
     def method_missing(name, *args, &block)

@@ -60,7 +60,7 @@ function add_loading_indicator(container, width, height, message, image_path)
 
   wrapper.className = 'chart-wrapper';
   wrapper.style.width = width + 'px';
-  wrapper.style.height = height + 'px';
+  wrapper.style.minHeight = height + 'px';
 
   blanket.className = 'chart-blanket';
 
@@ -91,4 +91,29 @@ function hide_loading_indicator(chart)
   }
 
   getElementsByClassName('chart-blanket', wrapper)[0].style.display = 'none';
+}
+
+function add_legend_div(id, main_div)
+{
+  var legend = document.getElementById(id);
+
+  if (!legend)
+  {
+    legend = document.createElement("DIV");
+    legend.className = 'chart-legend';
+    legend.id = id;
+    legend.style.width = main_div.getWidth() + 'px';
+
+    var wrapper = main_div.parentNode;
+    if(main_div.nextSibling)
+    {
+      wrapper.insertBefore(legend, main_div.nextSibling);
+    }
+    else
+    {
+      wrapper.appendChild(legend);
+    }
+  }
+
+  return legend;
 }

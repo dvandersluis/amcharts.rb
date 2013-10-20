@@ -22,6 +22,13 @@ module AmCharts
       concat render(template_type => "amcharts/#{partial_name}.js.erb", object: component, locals: options.merge(builder: self), &block)
     end
 
+    def render_legend
+      chart.legends.each do |l|
+        div = chart.legend_div == true ? "#{chart.container}_legend" : chart.legend_div
+        concat render(partial: 'amcharts/legend.js.erb', object: l, locals: { div: div, builder: self })
+      end
+    end
+
     def render_settings(object, name, index = nil)
       raise ArgumentError, "given object doesn't have settings" unless object.respond_to?(:settings)
 
@@ -38,7 +45,7 @@ module AmCharts
       end
     end
 
-    def render_listeners
+    def render_listeners()
       chart.listeners.each do |listener|
         concat render(partial: 'amcharts/listener.js.erb', locals: { type: listener.type, method: listener.method, builder: self })
       end

@@ -1,5 +1,7 @@
 module AmCharts
   class ChartBuilder
+    autoload :Function, 'amcharts/chart_builder/function'
+
     attr_reader :template, :chart
 
     def initialize(chart, template)

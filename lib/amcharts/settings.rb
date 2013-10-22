@@ -9,6 +9,10 @@ module AmCharts
       @settings = {}.with_indifferent_access
     end
 
+    def function(name)
+      ChartBuilder::Function.new(name)
+    end
+
     def method_missing(name, *args, &block)
       if block_given?
         @settings[name] = block.call(*args)

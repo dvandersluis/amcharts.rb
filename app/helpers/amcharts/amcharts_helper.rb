@@ -14,8 +14,11 @@ module AmCharts
       content_for(:stylesheets) { stylesheet_link_tag(*css_files) }
 
       # Render the chart builder
+      builder = AmCharts::ChartBuilder.new(chart, self)
       chart.container = container
-      javascript_tag(render(file: 'amcharts/chart_builder.js.erb', locals: { builder: AmCharts::ChartBuilder.new(chart, self), chart: chart, container: container }))
+      javascript_tag do
+        builder.render_js('chart_builder', template_type: :file, locals: { chart: chart, container: container })
+      end
     end
   end
 end

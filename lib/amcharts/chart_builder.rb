@@ -10,24 +10,35 @@ module AmCharts
     end
 
     def to_js(val)
+      val = instance_exec(&val) if val.is_a?(Proc)
       val = t(val) if val.is_a?(Symbol)
       raw(val.to_json)
     end
 
+    def render_js(name, options, &block)
+      template_type = options.delete(:template_type) || :partial
+      template_name = "amcharts/#{name}"
+
+      options[:locals] = options[:locals].merge(builder: self)
+      options = { template_type => template_name }.merge(options)
+
+      block_given? ? template.render(options, &block) : template.render(options)
+    end
+
     def render_data
-      concat render(partial: 'amcharts/data.js.erb', locals: { chart: chart, builder: self })
+      concat render_js('data', locals: { chart: chart })
     end
 
     def render_component(component, options = {}, &block)
       partial_name = component.respond_to?(:each) ? 'collection' : 'object'
       template_type = block_given? ? :layout : :partial
-      concat render(template_type => "amcharts/#{partial_name}.js.erb", object: component, locals: options.merge(builder: self), &block)
+      concat render_js(partial_name, template_type: template_type, object: component, locals: options, &block)
     end
 
     def render_legend
       chart.legends.each do |l|
         div = chart.legend_div == true ? "#{chart.container}_legend" : chart.legend_div
-        concat render(partial: 'amcharts/legend.js.erb', object: l, locals: { div: div, builder: self })
+        concat render_js('legend',object: l, locals: { div: div })
       end
     end
 
@@ -37,19 +48,19 @@ module AmCharts
       name.concat(index.to_s) if index
 
       object.settings.each do |key, value|
-        concat render(partial: 'amcharts/settings.js.erb', locals: { name: name, key: key, value: value, builder: self })
+        concat render_js('settings', locals: { name: name, key: key, value: value })
       end
     end
 
     def render_title
       chart.titles.each do |(title, options)|
-        concat render(partial: 'amcharts/title.js.erb', locals: { title: title, options: options, builder: self })
+        concat render_js('title', locals: { title: title, options: options })
       end
     end
 
     def render_listeners()
       chart.listeners.each do |listener|
-        concat render(partial: 'amcharts/listener.js.erb', locals: { type: listener.type, method: listener.method, builder: self })
+        concat render_js('listener', locals: { type: listener.type, method: listener.method })
       end
     end
 

@@ -1,0 +1,5 @@
+<% collection.each.with_index do |obj, index| -%>
+  <%= builder.render_js('object', template_type: :layout, object: obj, locals: local_assigns.merge(var: "#{name}#{index}")) do |obj, var| %>
+    <%= yield(obj, var) rescue nil %>
+  <% end %>
+<% end %>

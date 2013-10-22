@@ -1,9 +1,0 @@
-<% if chart.pie? %>
-  chart.valueField = '<%= chart.value_field %>';
-  chart.titleField = '<%= chart.title_field %>';
-<% else %>
-  <%= render layout: 'amcharts/collection.js.erb', object: chart.graphs, locals: { builder: builder, name: :graph, type: 'AmGraph' } do |obj, var| %>
-    <%= var %>.valueField = '<%= obj.value_field %>';
-    <%= var %>.type = '<%= obj.type %>';
-  <% end %>
-<% end %>

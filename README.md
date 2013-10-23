@@ -45,7 +45,7 @@ an I18n key (`chart_data_loading`) and an image (`amcharts/loading.gif`) which b
 cause the legend div to be given an ID the same as the main div, with a "_legend" suffix), or the ID you want to give the div.
 * `dimensions=('widthxheight')`: Allows width and height to be specified in one line
 
-### Notes about defining a chart
+### Defining a chart
 * Serial charts need to have their `graphs` defined on setup (this also allows multiple graphs to be defined; ie. for a multi-line chart).
 Graphs are initialized with `(name, type)`, where `type` is a [type of graph](http://docs.amcharts.com/javascriptcharts/AmGraph#type)
 that AmCharts is aware of (`:column`, `:line`, `:step`, etc.)
@@ -58,6 +58,10 @@ that AmCharts is aware of (`:column`, `:line`, `:step`, etc.)
         end
 
 * Pie charts do not use `graphs`, as they get their values directly from the given data set.
+
+### Note about the Version Number
+The version number correlates to the version of AmCharts that is included (ie. 3.1.1.0 is the first release of
+amcharts.rb which uses AmCharts v3.1.1)
 
 ## Using a Commercial AmCharts license
 

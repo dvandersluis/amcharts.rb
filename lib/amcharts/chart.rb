@@ -31,6 +31,10 @@ module AmCharts
       @category_field || data.first.keys.first
     end
 
+    def keys
+      data.first.keys
+    end
+
     def self.type
       ActiveSupport::StringInquirer.new(self.name.demodulize.downcase)
     end

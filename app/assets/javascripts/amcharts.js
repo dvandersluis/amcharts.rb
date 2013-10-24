@@ -59,8 +59,11 @@ function add_loading_indicator(container, width, height, message, image_path)
       loading = document.createTextNode(message);
 
   wrapper.className = 'chart-wrapper';
+  wrapper.id = container.id + "_wrapper"
   wrapper.style.width = width + 'px';
   wrapper.style.minHeight = height + 'px';
+
+  container.style.width = '100%';
 
   blanket.className = 'chart-blanket';
 

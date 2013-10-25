@@ -15,7 +15,7 @@ AmCharts.ready(function() {
 
   chart.dataProvider = chart_data;
   chart.categoryField = '<%= chart.category_field %>';
-  chart.pathToImages = '<%= escape_javascript asset_path('amcharts/') %>';
+  chart.pathToImages = '<%= escape_javascript File.dirname(helper.asset_path('amcharts/dragIcon.gif')) %>';
 
   <% builder.render_settings(chart, 'chart') %>
 

@@ -73,7 +73,7 @@ module AmCharts
     end
 
     def process_data
-      data.each { |row| yield row }
+      data.each.with_index { |row, index| yield row, index }
     end
 
     def type

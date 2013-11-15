@@ -1,3 +1,40 @@
+#### 3.2.0 ####################################################################################################################
+
+
+   # AmCharts.makeChart(divID, chartConfig); method added. divID is id of a div where your chart should appear. chartConfig is
+     JSON object with chart configuration. Check examples with _JSON_ prefix in samples folder to see this in action.
+     
+   # type property added to AmChart class. It is required to specify type to one of the following, when creating charts from
+     JSON config: serial, xy, radar, pie, gauge, funnel, map, stock
+     
+   # a possibility to export charts as image/pdf/svg added for all modern browsers except IE9 (IE10 is supported). The
+     exporting doesn't require any server side software and is made using js libraries only. Check samples with
+     _exporting_ prefix to see this in action. Exporting to SVG doesn't work very properly with stock chart or charts with
+     legend (will offer saving multiple files).
+   
+   # You can set any legend items via legend.data property, for example:   
+     legend.data = [{title:"first", color:"#CC0000", value:50}, {title:"second", color:"#00CC00", value:100}];
+     This allows creating any legend items you want. Call chart.legend.validateNow(); if you change legend's data at run time. 
+   
+   # AmAngularGauge supports legend now
+   
+   # bug fix - if a chart with scrollbar was rotated after the chart is created, the scrollbar's graph was shifted to a wrong
+     position.
+     
+   # bug fix - column graph type wasn't displayed in chart scrollbar (since 3.1.0)
+   
+   # gridAboveGraphs property added to AmCoordinate chart. This allow to show grid lines above your graphs, as world-famous
+     data visualization guru Edward Tufte suggests. Note, this won't work properly with 3D charts.
+   
+   # negative axis labels rotation possible. You can use values from -90 to -1 for labelRotation property since now.
+   
+   # bug fix: step line with changing line color was rendered incorrectly if some values were missing.
+   
+   # bug fix: labelPosition "inside" and "middle" for bar charts fixed.
+   
+   # bug fix: AmAngularGauge chart wasn't firing "rendered" event.   
+
+
 #### 3.1.1 ####################################################################################################################
 
    # FireFox error messages about style declarations fixed

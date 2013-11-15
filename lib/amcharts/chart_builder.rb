@@ -1,6 +1,7 @@
 module AmCharts
   class ChartBuilder
     autoload :Function, 'amcharts/chart_builder/function'
+    autoload :Literal, 'amcharts/chart_builder/literal'
 
     attr_reader :template, :chart
 

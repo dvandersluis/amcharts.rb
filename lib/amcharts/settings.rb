@@ -13,6 +13,10 @@ module AmCharts
       ChartBuilder::Function.new(name)
     end
 
+    def literal(name)
+      ChartBuilder::Literal.new(name)
+    end
+
     def method_missing(name, *args, &block)
       if block_given?
         @settings[name] = block.call(*args)

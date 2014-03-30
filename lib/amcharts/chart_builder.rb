@@ -31,6 +31,7 @@ module AmCharts
     end
 
     def render_component(component, options = {}, &block)
+      return unless component
       partial_name = component.respond_to?(:each) ? 'collection' : 'object'
       template_type = block_given? ? :layout : :partial
       concat render_js(partial_name, template_type: template_type, object: component, locals: options, &block)

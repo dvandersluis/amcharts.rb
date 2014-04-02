@@ -16,7 +16,7 @@ module AmCharts
 
   ActiveSupport::Inflector.inflections do |inflect|
     inflect.acronym "AmCharts"
-  end
+  end if defined?(ActiveSupport)
 
   Engine = Class.new(::Rails::Engine) do
     # Load the Amcharts helper when loading ActionView

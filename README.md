@@ -1,4 +1,4 @@
-# AmCharts.rb
+# AmCharts.rb [![Gem Version](https://badge.fury.io/rb/amcharts.rb.svg)](http://badge.fury.io/rb/amcharts.rb)
 
 Ruby on Rails wrapper for creating AmCharts charts.
 

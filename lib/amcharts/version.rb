@@ -1,3 +1,3 @@
 module AmCharts
-  VERSION = "3.2.0.2"
+  VERSION = "3.4.7.0"
 end

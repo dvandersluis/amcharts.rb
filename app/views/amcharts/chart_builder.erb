@@ -1,12 +1,12 @@
 // If the container element doesn't already exist, create it
-var container = add_container_if_needed('<%= container %>', <%= chart.width %>, <%= chart.height %>);
+var container = AmCharts.RB.Helpers.add_container_if_needed('<%= container %>', <%= chart.width %>, <%= chart.height %>);
 
 <% if chart.loading_indicator? %>
-  add_loading_indicator(container, <%= chart.width %>, <%= chart.height %>, <%= builder.to_js(:chart_data_loading) %>, '<%= escape_javascript asset_path('amcharts/loading.gif') %>');
+  AmCharts.RB.Helpers.add_loading_indicator(container, <%= chart.width %>, <%= chart.height %>, <%= builder.to_js(:chart_data_loading) %>, '<%= escape_javascript asset_path('amcharts/loading.gif') %>');
 <% end %>
 
 <% if chart.legend_div %>
-  add_legend_div('<%= chart.legend_div == true ? "#{container}_legend" : chart.legend_div %>', container);
+  AmCharts.RB.Helpers.add_legend_div('<%= chart.legend_div == true ? "#{container}_legend" : chart.legend_div %>', container);
 <% end %>
 
 AmCharts.ready(function() {

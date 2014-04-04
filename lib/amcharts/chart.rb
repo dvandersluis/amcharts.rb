@@ -59,9 +59,12 @@ module AmCharts
       @width, @height = dim.split("x").map(&:to_i)
     end
 
+    # Show a loading indicator while the chart is rendering
+    # A listener will automatically be added to hide the indicator when the rendered event
+    # is received
     def loading_indicator!
       @loading_indicator = true
-      listeners.new(:rendered, :hide_loading_indicator)
+      listeners.new(:rendered, 'AmCharts.RB.Helpers.hide_loading_indicator')
     end
 
     def loading_indicator?

@@ -37,6 +37,11 @@ module AmCharts
       @data_source = source
     end
 
+    # Should remote data be loaded right away?
+    def defer?
+      @data_source.fetch(:defer, false)
+    end
+
     def category_field
       @category_field || AmCharts::ChartBuilder::Function.new('new AmCharts.RB.Chart(chart).category_field()')
     end

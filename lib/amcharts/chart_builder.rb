@@ -8,6 +8,10 @@ module AmCharts
     def initialize(chart, template)
       @chart = chart
       @template = template
+
+      if @chart.loading_indicator? and !@chart.data_source
+        @chart.listeners.new(:rendered, 'AmCharts.RB.Helpers.hide_loading_indicator')
+      end
     end
 
     def to_js(val)
@@ -20,7 +24,7 @@ module AmCharts
       template_type = options.delete(:template_type) || :partial
       template_name = "amcharts/#{name}"
 
-      options[:locals] = options[:locals].merge(builder: self)
+      options[:locals] = (options[:locals] || {}).merge(builder: self)
       options = { template_type => template_name }.merge(options)
 
       block_given? ? template.render(options, &block) : template.render(options)
@@ -28,6 +32,14 @@ module AmCharts
 
     def render_data
       concat render_js('data', locals: { chart: chart })
+    end
+
+    def render_data_source
+      return unless chart.data_source
+      url = chart.data_source[:url]
+      params = chart.data_source.fetch(:params, {})
+      method = chart.data_source.fetch(:method, 'GET')
+      concat render_js('data_source', object: url, locals: { params: params, method: method })
     end
 
     def render_component(component, options = {}, &block)
@@ -40,7 +52,7 @@ module AmCharts
     def render_legend
       chart.legends.each do |l|
         div = chart.legend_div == true ? "#{chart.container}_legend" : chart.legend_div
-        concat render_js('legend',object: l, locals: { div: div })
+        concat render_js('legend', object: l, locals: { div: div })
       end
     end
 

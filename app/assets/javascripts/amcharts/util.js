@@ -1,4 +1,17 @@
 AmCharts.RB.Util = {
+  Class: {
+    create: function(block) {
+      function klass() {
+        this.initialize.apply(this, arguments);
+      }
+
+      klass.prototype = block || {};
+      if (!klass.prototype.initialize) klass.prototype.initialize = function() {}
+      klass.prototype.constructor = klass;
+      return klass;
+    }
+  },
+
   try_these: function()
   {
     var returnValue;
@@ -37,5 +50,12 @@ AmCharts.RB.Util = {
   is_function: function(object)
   {
     return Object.prototype.toString.call(object) === "[object Function]";
+  },
+
+  is_empty: function(object)
+  {
+    if (object === null || object === undefined) return true;
+    if (object.length !== undefined) return object.length == 0;
+    return undefined;
   }
 }

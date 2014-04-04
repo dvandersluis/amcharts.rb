@@ -8,7 +8,7 @@
     return -1;
   };
 
-  window.getElementsByClassName = function(className,context) {
+  window.getElementsByClassName = function(className, context) {
     if (context.getElementsByClassName) return context.getElementsByClassName(className);
     var elems = document.querySelectorAll ? context.querySelectorAll("." + className) : (function() {
       var all = context.getElementsByTagName("*"),

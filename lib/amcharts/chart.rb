@@ -13,7 +13,7 @@ module AmCharts
     autoload :Serial,       'amcharts/chart/serial'
     autoload :XY,           'amcharts/chart/xy'
 
-    attr_accessor :data_provider, :container
+    attr_accessor :data_provider, :data_source, :container
     attr_accessor :width, :height, :loading_indicator
     attr_reader :titles, :graphs, :legends, :data, :settings, :listeners, :legend_div
 
@@ -24,11 +24,21 @@ module AmCharts
       @listeners = Collection[Listener]
       @settings = Settings.new
       @titles = []
-      instance_exec(self, &block) if block_given?
+      update_settings(&block) if block_given?
+    end
+
+    def update_settings(&block)
+      instance_exec(self, &block)
+    end
+
+    # Allow data to be loaded from a remote source
+    def data_source=(source)
+      @data = []
+      @data_source = source
     end
 
     def category_field
-      @category_field || data.first.keys.first
+      @category_field || AmCharts::ChartBuilder::Function.new('new AmCharts.RB.Chart(chart).category_field()')
     end
 
     def keys
@@ -64,7 +74,6 @@ module AmCharts
     # is received
     def loading_indicator!
       @loading_indicator = true
-      listeners.new(:rendered, 'AmCharts.RB.Helpers.hide_loading_indicator')
     end
 
     def loading_indicator?

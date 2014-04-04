@@ -1,0 +1,5 @@
+var data_source = '<%= data_source %>', params = <%= builder.to_js(params) %>, method = '<%= method %>';
+new AmCharts.RB.RemoteJSONProvider(chart, data_source, params, method).load(1000);
+<% if builder.chart.loading_indicator? %>
+  <%= builder.render_js 'listener', locals: { type: :dataUpdated, method: 'AmCharts.RB.Helpers.hide_loading_indicator' } %>
+<% end %>

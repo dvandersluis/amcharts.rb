@@ -1,8 +1,8 @@
 // If the container element doesn't already exist, create it
 var container = AmCharts.RB.Helpers.add_container_if_needed('<%= container %>', <%= chart.width %>, <%= chart.height %>);
-
+AmCharts.RB.Helpers.add_blanket(container, <%= chart.width %>, <%= chart.height %>)
 <% if chart.loading_indicator? %>
-  AmCharts.RB.Helpers.add_loading_indicator(container, <%= chart.width %>, <%= chart.height %>, <%= builder.to_js(:chart_data_loading) %>, '<%= escape_javascript asset_path('amcharts/loading.gif') %>');
+  AmCharts.RB.Helpers.add_loading_indicator(container, <%= builder.to_js(:chart_data_loading) %>, '<%= escape_javascript asset_path('amcharts/loading.gif') %>');
 <% end %>
 
 <% if chart.legend_div %>
@@ -14,7 +14,7 @@ AmCharts.ready(function() {
   var chart = new <%= chart.amchart_type %>;
 
   chart.dataProvider = chart_data;
-  chart.categoryField = '<%= chart.category_field %>';
+  chart.categoryField = <%= builder.to_js(chart.category_field) %>;
   chart.pathToImages = '<%= escape_javascript "#{File.dirname(asset_path('amcharts/dragIcon.gif'))}/" %>';
 
   <% builder.render_settings(chart, 'chart') %>
@@ -33,4 +33,6 @@ AmCharts.ready(function() {
   <% builder.render_listeners %>
 
   chart.write('<%= container %>');
+
+  <% builder.render_data_source %>
 });

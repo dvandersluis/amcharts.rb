@@ -37,3 +37,13 @@
   right: 50%;
   text-align: center;
 }
+
+.chart-loading-error
+{
+  border: 2px solid red;
+  background-color: rgba(255,0,0,0.8);
+  color: white;
+  font-size: 11px;
+  padding: 5px 25px;
+  font-family: "Verdana";
+}

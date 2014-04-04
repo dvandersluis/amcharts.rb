@@ -14,4 +14,33 @@ describe AmCharts::Chart do
       its(:height) { should be_nil }
     end
   end
+
+  describe "#new" do
+    it "should add settings from the given block" do
+      chart = described_class.new do |c|
+        c.foo = :bar
+      end
+
+      chart.settings[:foo].should == :bar
+    end
+  end
+
+  describe "#update_settings" do
+    subject do
+      described_class.new do |c|
+        c.foo = :bar
+      end
+    end
+
+    it "should add new settings" do
+      subject.update_settings { |c| c.baz = :quux }
+      subject.settings[:foo].should == :bar
+      subject.settings[:baz].should == :quux
+    end
+
+    it "should override existing settings" do
+      subject.update_settings { |c| c.foo = :baz }
+      subject.settings[:foo].should == :baz
+    end
+  end
 end

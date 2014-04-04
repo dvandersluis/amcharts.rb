@@ -1,6 +1,6 @@
 <% if chart.pie? %>
-  chart.valueField = '<%= chart.value_field %>';
-  chart.titleField = '<%= chart.title_field %>';
+  chart.valueField = <%= builder.to_js(chart.value_field) %>;
+  chart.titleField = <%= builder.to_js(chart.title_field) %>;
 <% else %>
   <%#= render(layout: 'amcharts/collection', object: chart.graphs, locals: { builder: builder, name: :graph, type: 'AmGraph' }) do |obj, var| %>
   <%= builder.render_js('collection', template_type: :layout, object: chart.graphs, locals: { name: :graph, type: 'AmGraph' }) do |obj, var| %>

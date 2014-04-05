@@ -7,6 +7,7 @@ module AmCharts
   autoload :Chart,        'amcharts/chart'
   autoload :ChartBuilder, 'amcharts/chart_builder'
   autoload :Cursor,       'amcharts/cursor'
+  autoload :DataSource,   'amcharts/data_source'
   autoload :Graph,        'amcharts/graph'
   autoload :Legend,       'amcharts/legend'
   autoload :Listener,     'amcharts/listener'

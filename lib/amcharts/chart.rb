@@ -19,6 +19,7 @@ module AmCharts
 
     def initialize(*data, &block)
       @data = data.flatten
+      @data_source = DataSource.new
       @graphs = Collection[Graph]
       @legends = Collection[Legend]
       @listeners = Collection[Listener]
@@ -33,8 +34,7 @@ module AmCharts
 
     # Allow data to be loaded from a remote source
     def data_source=(source)
-      @data = []
-      @data_source = source
+      @data_source = DataSource.new(source)
     end
 
     # Should remote data be loaded right away?

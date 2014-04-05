@@ -10,7 +10,7 @@ AmCharts.RB.Helpers.add_blanket(container, <%= chart.width %>, <%= chart.height 
 <% end %>
 
 AmCharts.ready(function() {
-  var chart_data = <%= builder.to_js(chart.data) %>;
+  var chart_data = <%= builder.to_js(chart.data_source.empty? ? chart.data : []) %>;
   var chart = new <%= chart.amchart_type %>;
 
   chart.dataProvider = chart_data;

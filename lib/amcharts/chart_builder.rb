@@ -9,7 +9,7 @@ module AmCharts
       @chart = chart
       @template = template
 
-      if @chart.loading_indicator? and !@chart.data_source
+      if @chart.loading_indicator? and @chart.data_source.empty?
         @chart.listeners.new(:rendered, 'AmCharts.RB.Helpers.hide_loading_indicator')
       end
     end
@@ -35,7 +35,7 @@ module AmCharts
     end
 
     def render_data_source
-      return unless chart.data_source
+      return if chart.data_source.empty?
       url = chart.data_source[:url]
       params = chart.data_source.fetch(:params, {})
       method = chart.data_source.fetch(:method, 'GET')

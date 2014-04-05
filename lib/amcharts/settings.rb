@@ -3,10 +3,14 @@ require 'active_support/core_ext/hash/indifferent_access'
 
 module AmCharts
   class Settings
-    delegate :[], :each, :fetch, to: :@settings
+    delegate :[], :each, :fetch, :empty?, to: :@settings
 
-    def initialize
-      @settings = {}.with_indifferent_access
+    def to_h
+      @settings
+    end
+
+    def initialize(hash = {})
+      @settings = hash.with_indifferent_access
     end
 
     def function(name)

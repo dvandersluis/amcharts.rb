@@ -3,4 +3,6 @@
 //= require_self
 //= require_tree ./amcharts
 
-AmCharts.RB = {};
+AmCharts.RB = {
+  Charts: {}
+};

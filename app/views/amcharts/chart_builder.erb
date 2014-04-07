@@ -12,6 +12,7 @@ AmCharts.RB.Helpers.add_blanket(container, <%= chart.width %>, <%= chart.height 
 AmCharts.ready(function() {
   var chart_data = <%= builder.to_js(chart.data_source.empty? ? chart.data : []) %>;
   var chart = new <%= chart.amchart_type %>;
+  AmCharts.RB.Charts['<%= container %>'] = chart;
 
   chart.dataProvider = chart_data;
   chart.categoryField = <%= builder.to_js(chart.category_field) %>;

@@ -72,9 +72,9 @@ module AmCharts
       end
     end
 
-    def render_listeners()
-      chart.listeners.each do |listener|
-        concat render_js('listener', locals: { type: listener.type, method: listener.method })
+    def render_listeners(object = chart, var_name = 'chart')
+      object.listeners.each do |listener|
+        concat render_js('listener', locals: { type: listener.type, method: listener.method, var_name: var_name })
       end
     end
 

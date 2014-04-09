@@ -4,5 +4,5 @@ chart.remoteProvider = new AmCharts.RB.RemoteJSONProvider(chart, data_source, pa
   chart.remoteProvider.load();
 <% end %>
 <% if builder.chart.loading_indicator? %>
-  <%= builder.render_js 'listener', locals: { type: :dataUpdated, method: 'AmCharts.RB.Helpers.hide_loading_indicator' } %>
+  <%= builder.render_js 'listener', locals: { type: :dataUpdated, method: 'AmCharts.RB.Helpers.hide_loading_indicator', var_name: 'chart' } %>
 <% end %>

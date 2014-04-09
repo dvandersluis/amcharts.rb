@@ -1,1 +1,5 @@
-<%= var_name %>.addListener(<%= builder.to_js(type.to_s) %>, function() { return <%= method %>.apply(null, [chart]) });
+<%= var_name %>.addListener(<%= builder.to_js(type.to_s) %>, function() {
+  args = Array.prototype.slice.call(arguments);
+  args.unshift(chart);
+  return <%= method %>.apply(null, args)
+});

@@ -1,6 +1,6 @@
 // If the container element doesn't already exist, create it
-var container = AmCharts.RB.Helpers.add_container_if_needed('<%= container %>', <%= chart.width %>, <%= chart.height %>);
-AmCharts.RB.Helpers.add_blanket(container, <%= chart.width %>, <%= chart.height %>)
+var container = AmCharts.RB.Helpers.add_container_if_needed('<%= container %>', <%= builder.to_js chart.width %>, <%= builder.to_js chart.height %>);
+AmCharts.RB.Helpers.add_blanket(container)
 <% if chart.loading_indicator? %>
   AmCharts.RB.Helpers.add_loading_indicator(container, <%= builder.to_js(:chart_data_loading) %>, '<%= escape_javascript asset_path('amcharts/loading.gif') %>');
 <% end %>

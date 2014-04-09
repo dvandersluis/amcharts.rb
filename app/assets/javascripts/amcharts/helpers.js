@@ -1,4 +1,10 @@
 AmCharts.RB.Helpers = {
+  create_unit: function(num, unit)
+  {
+    // If the number doesn't end with a unit already, add the given one
+    return num.toString().match(/\d$/) ? num + unit : num;
+  },
+
   add_container_if_needed: function(id, width, height)
   {
     var container = document.getElementById(id);
@@ -7,8 +13,8 @@ AmCharts.RB.Helpers = {
       container = document.createElement("DIV");
       container.className = 'chart';
       container.id = id;
-      container.style.width = width + 'px';
-      container.style.height = height + 'px';
+      if (width) container.style.width = this.create_unit(width, 'px');
+      container.style.height = this.create_unit(height, 'px');
 
       // Add the container before the last script
       var scripts = document.getElementsByTagName('script');
@@ -19,7 +25,7 @@ AmCharts.RB.Helpers = {
     return container;
   },
 
-  add_blanket: function(container, width, height)
+  add_blanket: function(container)
   {
     var wrapper = document.createElement("DIV"),
       blanket = document.createElement("DIV"),
@@ -29,8 +35,8 @@ AmCharts.RB.Helpers = {
 
     wrapper.className = 'chart-wrapper';
     wrapper.id = container.id + "_wrapper";
-    wrapper.style.width = width + 'px';
-    wrapper.style.minHeight = height + 'px';
+    wrapper.style.width = container.style.width;
+    wrapper.style.minHeight = container.style.height;
 
     container.style.width = '100%';
     blanket.className = 'chart-blanket';

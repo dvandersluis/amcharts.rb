@@ -39,6 +39,11 @@ module AmCharts
       return false if menus.empty?
       menus.flat_map(&:formats).any?{ |f| f == :pdf }
     end
+
+    def empty?
+      settings.empty? and menus.empty?
+    end
+
   private
 
     def method_missing(name, *args, &block)

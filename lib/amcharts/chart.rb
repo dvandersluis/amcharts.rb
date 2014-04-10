@@ -24,7 +24,7 @@ module AmCharts
       @legends = Collection[Legend]
       @listeners = Collection[Listener]
       @settings = Settings.new
-      @export = ExportSettings.new
+      @export = nil
       @titles = []
       update_settings(&block) if block_given?
     end
@@ -60,13 +60,15 @@ module AmCharts
     end
 
     def export?
-      !@export.empty?
+      !@export.nil?
     end
 
     def export(&block)
+      @export ||= ExportSettings.new
       yield @export if block_given?
       @export
     end
+    alias_method :exportable!, :export
 
     def add_title(text, options = {})
       @titles << [text, options.reverse_merge(size: 13, bold: true, alpha: 1, color: '#000000')]

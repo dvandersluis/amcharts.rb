@@ -1,10 +1,10 @@
 /*
  *= require amcharts
- *= require amstock
- *= require funnel
- *= require gauge
- *= require pie
- *= require radar
- *= require serial
- *= require xy
+ *= require amcharts/amstock
+ *= require amcharts/funnel
+ *= require amcharts/gauge
+ *= require amcharts/pie
+ *= require amcharts/radar
+ *= require amcharts/serial
+ *= require amcharts/xy
 */

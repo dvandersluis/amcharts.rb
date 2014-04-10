@@ -1,3 +1,5 @@
+require 'amcharts/settings'
+
 module AmCharts
   module UsesSettings
     attr_reader :settings

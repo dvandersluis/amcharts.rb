@@ -3,17 +3,18 @@ require "amcharts/version"
 require_relative '../app/helpers/amcharts/amcharts_helper'
 
 module AmCharts
-  autoload :Axis,         'amcharts/axis'
-  autoload :Chart,        'amcharts/chart'
-  autoload :ChartBuilder, 'amcharts/chart_builder'
-  autoload :Cursor,       'amcharts/cursor'
-  autoload :DataSource,   'amcharts/data_source'
-  autoload :Graph,        'amcharts/graph'
-  autoload :Legend,       'amcharts/legend'
-  autoload :Listener,     'amcharts/listener'
-  autoload :ScrollBar,    'amcharts/scroll_bar'
-  autoload :Settings,     'amcharts/settings'
-  autoload :UsesSettings, 'amcharts/uses_settings'
+  autoload :Axis,           'amcharts/axis'
+  autoload :Chart,          'amcharts/chart'
+  autoload :ChartBuilder,   'amcharts/chart_builder'
+  autoload :Cursor,         'amcharts/cursor'
+  autoload :DataSource,     'amcharts/data_source'
+  autoload :ExportSettings, 'amcharts/export_settings'
+  autoload :Graph,          'amcharts/graph'
+  autoload :Legend,         'amcharts/legend'
+  autoload :Listener,       'amcharts/listener'
+  autoload :ScrollBar,      'amcharts/scroll_bar'
+  autoload :Settings,       'amcharts/settings'
+  autoload :UsesSettings,   'amcharts/uses_settings'
 
   ActiveSupport::Inflector.inflections do |inflect|
     inflect.acronym "AmCharts"

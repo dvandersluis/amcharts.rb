@@ -78,6 +78,11 @@ module AmCharts
       end
     end
 
+    def render_export
+      return if chart.export.empty?
+      concat render_js('export', object: chart.export)
+    end
+
   private
 
     def method_missing(*args, &block)

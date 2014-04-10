@@ -15,7 +15,7 @@ module AmCharts
 
     attr_accessor :data_provider, :data_source, :container
     attr_accessor :width, :height, :loading_indicator
-    attr_reader :titles, :graphs, :legends, :data, :settings, :listeners, :legend_div
+    attr_reader :titles, :graphs, :legends, :data, :settings, :listeners, :legend_div, :export
 
     def initialize(*data, &block)
       @data = data.flatten
@@ -24,6 +24,7 @@ module AmCharts
       @legends = Collection[Legend]
       @listeners = Collection[Listener]
       @settings = Settings.new
+      @export = ExportSettings.new
       @titles = []
       update_settings(&block) if block_given?
     end
@@ -56,6 +57,15 @@ module AmCharts
 
     def self.amchart_type
       "AmCharts.Am#{type.to_s.titleize}Chart()"
+    end
+
+    def export?
+      !@export.empty?
+    end
+
+    def export(&block)
+      yield @export if block_given?
+      @export
     end
 
     def add_title(text, options = {})

@@ -13,8 +13,8 @@ module AmCharts
       @settings = hash.with_indifferent_access
     end
 
-    def function(name)
-      ChartBuilder::Function.new(name)
+    def function(name, body = nil)
+      ChartBuilder::Function.new(name, body)
     end
 
     def literal(name)

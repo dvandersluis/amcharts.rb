@@ -42,5 +42,9 @@ describe AmCharts::Chart do
       subject.update_settings { |c| c.foo = :baz }
       subject.settings[:foo].should == :baz
     end
+
+    it "should return the chart" do
+      subject.update_settings{}.should == subject
+    end
   end
 end

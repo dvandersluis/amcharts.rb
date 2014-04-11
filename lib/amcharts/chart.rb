@@ -31,6 +31,7 @@ module AmCharts
 
     def update_settings(&block)
       instance_exec(self, &block)
+      self
     end
 
     # Allow data to be loaded from a remote source

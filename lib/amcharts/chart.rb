@@ -15,7 +15,7 @@ module AmCharts
 
     attr_accessor :data_provider, :data_source, :container
     attr_accessor :width, :height, :loading_indicator
-    attr_reader :titles, :graphs, :legends, :data, :settings, :listeners, :legend_div, :export
+    attr_reader :titles, :labels, :graphs, :legends, :data, :settings, :listeners, :legend_div, :export
 
     def initialize(*data, &block)
       @data = data.flatten
@@ -26,6 +26,7 @@ module AmCharts
       @settings = Settings.new
       @export = nil
       @titles = []
+      @labels = []
       update_settings(&block) if block_given?
     end
 
@@ -72,7 +73,11 @@ module AmCharts
     alias_method :exportable!, :export
 
     def add_title(text, options = {})
-      @titles << [text, options.reverse_merge(size: 13, bold: true, alpha: 1, color: '#000000')]
+      @titles << [text, options.reverse_merge(size: 13, bold: true, alpha: 1, color: '#000')]
+    end
+
+    def add_label(text, x, y, options = {})
+      @labels << [text, x, y, options.reverse_merge(size: 11, align: 'left', color: '#000', rotation: 0, alpha: 1, bold: false)]
     end
 
     def width=(w)

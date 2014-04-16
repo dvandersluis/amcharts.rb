@@ -35,14 +35,24 @@ AmCharts.RB.Util = {
   {
     var str = [];
 
-    for(var p in obj)
+    if (AmCharts.ifArray(obj))
     {
-      var k = prefix ? prefix + "[" + p + "]" : p, v = obj[p];
-
-      str.push(typeof v == "object" ?
-        AmCharts.RB.Util.to_query_string(v, k) :
-        encodeURIComponent(k) + "=" + encodeURIComponent(v));
+      for (var i = 0; i < obj.length; i++)
+      {
+        var k = prefix ? prefix + "[]" : "[]", v = obj[i];
+        str.push(encodeURIComponent(k) + '=' + encodeURIComponent(v));
+      }
     }
+    else {
+      for (var p in obj) {
+        if (!obj.hasOwnProperty(p)) continue;
+        var k = prefix ? prefix + "[" + p + "]" : p, v = obj[p];
+
+        str.push(typeof v == "object" ?
+          AmCharts.RB.Util.to_query_string(v, k) :
+          encodeURIComponent(k) + "=" + encodeURIComponent(v));
+      }
+  }
 
     return str.join("&");
   },

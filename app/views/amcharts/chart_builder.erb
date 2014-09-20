@@ -9,12 +9,17 @@ AmCharts.RB.Helpers.add_blanket(container)
   AmCharts.RB.Helpers.add_legend_div('<%= chart.legend_div == true ? "#{container}_legend" : chart.legend_div %>', container);
 <% end %>
 
+<% builder.render_immediate_data_load %>
+
 AmCharts.ready(function() {
   var chart_data = <%= builder.to_js(chart.data_source.empty? ? chart.data : []) %>;
   var chart = new <%= chart.amchart_type %>;
+  chart.dataProvider = chart_data;
+
+  <% builder.render_data_source %>
+
   AmCharts.RB.Charts['<%= container %>'] = chart;
 
-  chart.dataProvider = chart_data;
   chart.categoryField = <%= builder.to_js(chart.category_field) %>;
   chart.pathToImages = '<%= escape_javascript "#{File.dirname(asset_path('amcharts/dragIcon.gif'))}/" %>';
 
@@ -38,5 +43,5 @@ AmCharts.ready(function() {
 
   chart.write('<%= container %>');
 
-  <% builder.render_data_source %>
+  AmCharts.RB.Helpers.load_from_immediate_provider(chart);
 });

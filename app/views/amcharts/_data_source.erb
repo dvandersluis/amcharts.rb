@@ -1,8 +1,11 @@
-var data_source = '<%= data_source %>', params = <%= builder.to_js(params) %>, method = '<%= method %>';
-chart.remoteProvider = new AmCharts.RB.RemoteJSONProvider(chart, data_source, params, method);
-<% unless builder.chart.defer? %>
-  chart.remoteProvider.load();
+<% if builder.chart.defer? %>
+  var data_source = '<%= data_source %>', params = <%= builder.to_js(params) %>, method = '<%= method %>';
+  chart.remoteProvider = new AmCharts.RB.RemoteJSONProvider(chart, data_source, params, method);
+<% else %>
+  chart.remoteProvider = immediateRemoteProvider;
+  immediateRemoteProvider.chart = new AmCharts.RB.Chart(chart);
 <% end %>
+
 <% if builder.chart.loading_indicator? %>
   <%= builder.render_js 'listener', locals: { type: :dataUpdated, method: 'AmCharts.RB.Helpers.hide_loading_indicator', var_name: 'chart' } %>
 <% end %>

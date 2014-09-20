@@ -42,6 +42,14 @@ module AmCharts
       concat render_js('data_source', object: url, locals: { params: params, method: method })
     end
 
+    def render_immediate_data_load
+      return if chart.data_source.empty? || chart.defer?
+      url = chart.data_source[:url]
+      params = chart.data_source.fetch(:params, {})
+      method = chart.data_source.fetch(:method, 'GET')
+      concat render_js('immediate_data_load', locals: { data_source: url, params: params, method: method })
+    end
+
     def render_component(component, options = {}, &block)
       return unless component
       partial_name = component.respond_to?(:each) ? 'collection' : 'object'

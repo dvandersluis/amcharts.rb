@@ -90,10 +90,22 @@ AmCharts.RB.Helpers = {
   },
 
   hide_loading_indicator: function(chart) {
+    // If data is updated but still empty, keep the indicator up
+    if (!chart.dataProvider.length) return;
+
     var container = chart.container.div,
         blanket = AmCharts.RB.Helpers.get_blanket(container);
 
     if (blanket) blanket.style.display = 'none';
+  },
+
+  // If the chart is provided by a remote provider which is loaded immediately (not defered),
+  // and the provider has loaded before the chart has, reload the chart with the data
+  load_from_immediate_provider: function(chart) {
+    if (chart.remoteProvider && chart.remoteProvider.loaded() && !chart.dataProvider.length)
+    {
+      new AmCharts.RB.Chart(chart).load_data(chart.remoteProvider.data);
+    }
   },
 
   add_legend_div: function(id, main_div) {

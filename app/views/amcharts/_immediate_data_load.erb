@@ -1,0 +1,3 @@
+var data_source = '<%= data_source %>', params = <%= builder.to_js(params) %>, method = '<%= method %>';
+var immediateRemoteProvider = new AmCharts.RB.RemoteJSONProvider(null, data_source, params, method);
+immediateRemoteProvider.load();

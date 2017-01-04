@@ -25,4 +25,12 @@ Gem::Specification.new do |spec|
   end
 
   spec.add_dependency 'collection_of', '>= 1.0.3'
+
+  spec.add_development_dependency 'rake', '> 11.0.1', '< 12'
+  spec.add_development_dependency 'pry'
+  spec.add_development_dependency 'rspec', '2.14.1'
+  spec.add_development_dependency 'nokogiri', '~> 1.6.8'
+  spec.add_development_dependency 'thor'
+  spec.add_development_dependency 'mechanize', '2.7.4'
+  spec.add_development_dependency 'rubyzip', '1.1.0'
 end

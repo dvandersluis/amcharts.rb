@@ -10,4 +10,3 @@ rvm:
   - 2.3.3
   - 2.4.0
 before_install: gem install bundler -v 1.13.7
-install: bundle install --jobs=3 --retry=3 --without upgrade

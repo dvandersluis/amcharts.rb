@@ -1,6 +1,8 @@
 require 'active_support/core_ext/string/inflections'
 require 'active_support/string_inquirer'
 require 'active_support/core_ext/array/access'
+require 'active_support/core_ext/class/attribute'
+require 'active_support/core_ext/object/blank'
 require 'amcharts'
 
 module AmCharts
@@ -13,6 +15,7 @@ module AmCharts
     autoload :Serial,       'amcharts/chart/serial'
     autoload :XY,           'amcharts/chart/xy'
 
+    class_attribute :default_settings
     attr_accessor :data_provider, :data_source, :container
     attr_accessor :width, :height, :loading_indicator
     attr_reader :titles, :labels, :graphs, :legends, :data, :settings, :listeners, :legend_div, :export
@@ -23,11 +26,28 @@ module AmCharts
       @graphs = Collection[Graph]
       @legends = Collection[Legend]
       @listeners = Collection[Listener]
-      @settings = Settings.new
+      @settings = Settings.new(self.class.defaults)
       @export = nil
       @titles = []
       @labels = []
+
       update_settings(&block) if block_given?
+    end
+
+    class << self
+      def defaults(&block)
+        if block_given?
+          self.default_settings ||= Settings.new
+          instance_exec(self.default_settings, &block)
+        else
+          return {} if self.default_settings.blank?
+          self.default_settings.to_h.symbolize_keys
+        end
+      end
+
+      def clear_defaults
+        self.default_settings = nil
+      end
     end
 
     def update_settings(&block)

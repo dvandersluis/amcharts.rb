@@ -24,7 +24,7 @@ module AmCharts
     def method_missing(name, *args, &block)
       if block_given?
         @settings[name] = block.call(*args)
-      elsif name.to_s.end_with?('=') and args.length == 1
+      elsif name.to_s.end_with?('=') && args.length == 1
         prefix = name.to_s.gsub(/=\z/, '')
         @settings[prefix] = args.first
       elsif !args.empty?

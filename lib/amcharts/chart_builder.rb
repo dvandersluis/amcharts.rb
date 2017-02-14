@@ -97,6 +97,12 @@ module AmCharts
       concat render_js('export', object: chart.export)
     end
 
+    def render_functions
+      chart.functions.each do |fn|
+        concat render_js('function', object: fn)
+      end
+    end
+
   private
 
     def method_missing(*args, &block)

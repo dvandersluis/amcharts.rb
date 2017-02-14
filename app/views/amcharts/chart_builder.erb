@@ -41,6 +41,8 @@ AmCharts.ready(function() {
 
   <% builder.render_export %>
 
+  <% builder.render_functions %>
+
   chart.write('<%= container %>');
 
   AmCharts.RB.Helpers.load_from_immediate_provider(chart);

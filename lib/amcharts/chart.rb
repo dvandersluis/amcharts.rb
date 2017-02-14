@@ -18,7 +18,7 @@ module AmCharts
     class_attribute :default_settings
     attr_accessor :data_provider, :data_source, :container
     attr_accessor :width, :height, :loading_indicator
-    attr_reader :titles, :labels, :graphs, :legends, :data, :settings, :listeners, :legend_div, :export
+    attr_reader :titles, :labels, :graphs, :legends, :data, :settings, :listeners, :legend_div, :export, :functions
 
     def initialize(*data, &block)
       @data = data.flatten
@@ -30,6 +30,7 @@ module AmCharts
       @export = nil
       @titles = []
       @labels = []
+      @functions = []
 
       update_settings(&block) if block_given?
     end
@@ -146,6 +147,10 @@ module AmCharts
 
     def value_axes
       []
+    end
+
+    def call_function(fn)
+      @functions << fn
     end
 
   private

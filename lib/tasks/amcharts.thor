@@ -19,7 +19,7 @@ class Amcharts::Update < Thor
   desc :charts, "Update AmCharts Charts package"
   method_option :ask, type: :boolean, default: false, aliases: '--no-force'
   def charts
-    path = download_zip('http://www.amcharts.com/downloads/javascript-charts/')
+    path = download_zip('http://www.amcharts.com/dl/javascript-charts/')
 
     say_status :updating, "Charts package to version #{get_version}.", :green
 
@@ -38,7 +38,7 @@ class Amcharts::Update < Thor
 
   desc :stocks, "Update AmCharts Stocks package"
   def stocks
-    path = download_zip('http://www.amcharts.com/downloads/stock-chart/')
+    path = download_zip('http://www.amcharts.com/dl/stock-chart/')
 
     say_status :updating, "Stock package to version #{get_version}.", :green
 
@@ -82,8 +82,7 @@ private
   def get_version
     @version ||= begin
       page = mechanize_agent.get('http://www.amcharts.com/javascript-charts/changelog/')
-      page.body[/Change Log (\d+(?:\.\d+)*)/]
-      Regexp.last_match[1]
+      page.search('.entry-content h2').first.text
     end
   end
 

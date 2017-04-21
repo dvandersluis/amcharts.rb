@@ -2,4 +2,8 @@ var legend = new AmCharts.AmLegend;
 <% builder.render_settings(legend, 'legend') %>
 <%= yield(legend, 'legend') rescue nil %>
 <% builder.render_listeners(legend, 'legend') %>
-chart.addLegend(legend, <%= builder.to_js(div) %>);
+<% if div.present? %>
+  chart.addLegend(legend, <%= builder.to_js(div) %>);
+<% else %>
+  chart.addLegend(legend);
+<% end %>

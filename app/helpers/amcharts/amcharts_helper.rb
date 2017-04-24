@@ -1,18 +1,19 @@
 module AmCharts
   module AmChartsHelper
     def amchart(chart, container)
-      # Load necessary JS and CSSfiles, without loading one more than once
+      # Load necessary JS and CSS files, without loading one more than once
       @loaded_amchart_files ||= { js: [], css: []}
 
       js_files = ['amcharts', "amcharts/#{chart.type}"]
+      css_files = ['amcharts']
 
       if chart.export?
-        js_files.concat(%w(amcharts/exporting/amexport amcharts/exporting/rgbcolor amcharts/exporting/canvg amcharts/exporting/filesaver))
-        js_files.concat(%w(amcharts/exporting/jspdf amcharts/exporting/jspdf.plugin.addimage)) if chart.export.pdf?
+        js_files << 'amcharts/plugins/export/export.min'
+        css_files << 'amcharts/plugins/export/export'
       end
 
       js_files -= @loaded_amchart_files[:js]
-      css_files = ['amcharts'] - @loaded_amchart_files[:css]
+      css_files -= @loaded_amchart_files[:css]
 
       @loaded_amchart_files[:js] += js_files
       @loaded_amchart_files[:css] += css_files

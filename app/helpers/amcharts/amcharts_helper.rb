@@ -5,10 +5,14 @@ module AmCharts
       @loaded_amchart_files ||= { js: [], css: []}
 
       js_files = ['amcharts', "amcharts/#{chart.type}"]
+      js_files << "amcharts/lang/#{chart.language}" if chart.language?
+
       css_files = ['amcharts']
 
       if chart.export?
         js_files << 'amcharts/plugins/export/export.min'
+        js_files << "amcharts/plugins/export/lang/#{chart.language}" if chart.language?
+
         css_files << 'amcharts/plugins/export/export'
       end
 

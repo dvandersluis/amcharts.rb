@@ -1,11 +1,3 @@
 var exportConfig = {};
 <% builder.render_settings(export, 'exportConfig') %>
-<% export.menus.each.with_index do |m, i| %>
-  var menu = {};
-  <% if i == 0 %>
-    exportConfig.menuItems = [];
-  <% end %>
-  <% builder.render_settings(m, 'menu') %>
-  exportConfig.menuItems.push(menu);
-<% end %>
-chart.exportConfig = exportConfig;
+chart.export = exportConfig;

@@ -20,6 +20,8 @@ module AmCharts
     attr_accessor :width, :height, :loading_indicator
     attr_reader :titles, :labels, :graphs, :legends, :data, :settings, :listeners, :legend_div, :export, :functions
 
+    delegate :language?, to: :settings
+
     def initialize(*data, &block)
       @data = data.flatten
       @data_source = DataSource.new
